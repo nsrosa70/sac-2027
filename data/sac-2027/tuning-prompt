@@ -1,0 +1,30 @@
+Act as a control-systems engineer. Use the attached experimental input-output data to identify a plant model and propose a PI controller for Apache Pulsar and RabbitMQ.
+
+System definitions
+- Apache Pulsar input u(k): subscription dispatch rate, in messages/s.
+- RabbitMQ input u(k): AMQP 1.0 consumer link credit, in messages.
+- Output y(k): measured message-arrival rate at the consumer, in messages/s.
+- Reference r(k): desired consumer message-arrival rate.
+- Error: e(k) = r(k) - y(k).
+
+Analyze Pulsar and RabbitMQ separately. Do not assume they have the same plant, actuator scale, model, or PI gains.
+
+Data analysis and plant identification
+1. Inspect the data columns, units, timestamps, missing values, duplicate samples, and outliers. Determine the sampling interval from the timestamps; do not assume one if it cannot be verified.
+2. Describe each actuator’s tested range and the observed input-output response, including delays, plateaus, saturation, and nonlinear behavior.
+3. Use the first 70% of each time series, in chronological order, for identification and the remaining 30% for validation. Do not shuffle time-series samples.
+4. Identify a suitable plant model for each middleware. Report the model structure, equation, parameters, units, fitting method, and validation results. Compare measured and predicted outputs and report residuals and RMSE. State when the data do not support a reliable model.
+
+PI design
+5. Propose separate Kp and Ki values for Pulsar and RabbitMQ, consistent with the identified models and each actuator’s units and limits.
+6. Use the implemented controller’s actual PI form. If using incremental PI, state it explicitly, for example:
+   u[k] = u[k-1] + Kp(e[k] - e[k-1]) + Ki Δt e[k]
+   Explain the meaning and units of Kp, Ki, and Δt. Do not mix continuous-time and discrete-time gain conventions.
+7. Account for actuator bounds, command resolution, delays, and rate limits. Pulsar dispatch-rate commands and RabbitMQ link-credit commands may need to be integers. Include output clamping and anti-windup, and explain how rounding affects the controller.
+8. If useful, report multiple candidate tunings and compare their predicted tracking behavior. Do not present simulated predictions as experimental results.
+
+Validation and reporting
+9. Evaluate candidate gains against the held-out data or a clearly described plant simulation. Report the method and limitations. Open-loop data or model simulation alone does not establish experimental closed-loop validation.
+10. Report Kp, Ki, sampling interval Δt, Ki·Δt, and Ti = Kp/Ki where applicable. Distinguish measured values, model predictions, assumptions, and recommendations.
+11. Compare tracking using RMSE and NRMSE. Where closed-loop reference-tracking data are available, also report overshoot, settling time, steady-state error, and goal-range coverage. For settling time, use the 20% reference band and assess the five reference transitions over their 150-sample intervals if those are the data being analyzed.
+12. Do not invent missing measurements, actuator limits, parameters, or results. Clearly label each recommendation as model-based, provisional, or experimentally validated, as supported by the evidence.
