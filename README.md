@@ -1,6 +1,6 @@
 # Research Artefacts
 
-This repository contains the source code and experimental data for the paper.
+This repository contains the source code and experimental data for the paper submitted to ACM SAC 2027.
 
 ## Source code and configurations
 
