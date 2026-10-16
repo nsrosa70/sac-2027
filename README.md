@@ -1,6 +1,6 @@
 # Research Artefacts
 
-This repository contains the source code and experimental data for the paper submitted to ACM SAC 2027.
+This repository contains the source code and experimental data for the paper submitted to the ACM SAC 2027 conference.
 
 ## Source code and configurations
 
@@ -16,8 +16,7 @@ This repository contains the source code and experimental data for the paper sub
 
 ## Plant identification and controller tuning
 
-- [Prompt](data/sac-2027/tuning-prompt)
-- [Controller tuning materials](tuning/)
+- [ChatGPT Prompt](data/sac-2027/tuning-prompt)
 
 ## Acknowledgement
 
