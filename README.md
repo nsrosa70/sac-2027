@@ -16,7 +16,7 @@ This repository contains the source code and experimental data for the paper sub
 
 ## Plant identification and controller tuning
 
-- [Prompt](identification/)
+- [Prompt](data/sac-2027/tuning-prompt)
 - [Controller tuning materials](tuning/)
 
 ## Acknowledgement
